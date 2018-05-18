@@ -8,6 +8,7 @@ public class Main {
 		System.out.println("1.가입 2.조회");
 		Scanner sc = new Scanner(System.in);
 		int choice = sc.nextInt();
+		String memname="";
 
 		if (choice == 1) {
 			System.out.print("이름");
@@ -19,6 +20,7 @@ public class Main {
 			System.out.print("고객번호");
 			String memNum = sc.next();
 			Member mem = new Member(name, age, tel, memNum);
+			memname=mem.getName();
 			MemberDAO dao = new MemberDAO();
 			dao.insert(mem);
 
@@ -35,7 +37,7 @@ public class Main {
 			System.out.println("고객이름");
 			String memName = sc.next();
 			MemberDAO dao = new MemberDAO();
-			Member m = dao.delete(memName);
+			dao.delete(memname);
 			
 		}
 	}

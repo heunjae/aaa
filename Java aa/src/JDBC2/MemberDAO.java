@@ -110,4 +110,49 @@ public class MemberDAO {
 		return m;
 	}
 	
+	public void delete(String memName) {
+		// JDBC 사용하기
+				String url = "jdbc:oracle:thin:@localhost:1521:xe";
+				String user = "test";
+				String password = "test";
+				Connection con = null;
+				PreparedStatement psmt = null;
+
+				try {
+					// 1. 드라이버 로딩
+					Class.forName("oracle.jdbc.driver.OracleDriver");
+					// 2. 데이터베이스와 연결하여 Connection 객체 얻기
+					con = DriverManager.getConnection(url, user, password);
+					// 3. SQL 문장 준비하기
+					String sql = "delete from Member where name = ?";
+					psmt = con.prepareStatement(sql);
+					psmt.setString(1, memName);
+					// 4. 실행하기
+					int num = psmt.executeUpdate();
+					System.out.println(num);
+
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					System.out.println("클래스를 찾을 수 없습니다.");
+					e.printStackTrace();
+
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					System.out.println("SQL 실행중 문제가 발생");
+					e.printStackTrace();
+				} finally {
+					// 5. 연결 끊기
+					try {
+						psmt.close();
+						con.close();
+
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+	}
+	
+	
 }
