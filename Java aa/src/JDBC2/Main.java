@@ -30,6 +30,13 @@ public class Main {
 			System.out.println("이름/나이/전화번호/고객번호");
 			System.out.println(m.getName()+ "/" + m.getAge() + 
 					"/" + m.getTel() + "/" + m.getMemNum());
+			
+		} else if (choice == 3) {
+			System.out.println("고객이름");
+			String memName = sc.next();
+			MemberDAO dao = new MemberDAO();
+			Member m = dao.delete(memName);
+			
 		}
 	}
 
